@@ -1,11 +1,13 @@
 from flask import Flask, request, abort
 
 from .database import initialize_database, db, Todo
+from .login import initialize_login
 
 app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
 
 initialize_database(app)
+initialize_login(app)
 
 
 @app.get("/todos")
