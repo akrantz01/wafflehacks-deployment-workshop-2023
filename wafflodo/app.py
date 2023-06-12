@@ -15,6 +15,7 @@ initialize_login(app)
 
 
 @app.get("/todos")
+@login_required
 def list_todos():
     """
     Get a list of all the todos
@@ -26,6 +27,7 @@ def list_todos():
 
 
 @app.post("/todos")
+@login_required
 def create_todo():
     """
     Create a new todo
@@ -42,6 +44,7 @@ def create_todo():
 
 
 @app.put("/todos/<int:id>/toggle")
+@login_required
 def toggle_todo(id: int):
     """
     Toggle the completion status of a todo
@@ -56,6 +59,7 @@ def toggle_todo(id: int):
 
 
 @app.delete("/todos/<int:id>")
+@login_required
 def delete_todo(id: int):
     """
     Delete a todo
