@@ -1,6 +1,9 @@
+from typing import List
+
 from flask import Flask
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import relationship, Mapped
 
 db = SQLAlchemy()
 
@@ -12,6 +15,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
 
+    todos: Mapped[List["Todo"]] = relationship(back_populates="user")
+
     def __repr__(self):
         return f"<User id={self.id} username={self.username!r}>"
 
@@ -22,6 +27,9 @@ class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String, nullable=False)
     complete = db.Column(db.Boolean, nullable=False, default=False)
+
+    user_id: Mapped[int] = db.mapped_column(db.ForeignKey("users.id"))
+    user: Mapped["User"] = relationship(back_populates="todos")
 
     def __repr__(self):
         return f"<Todo id={self.id} content={self.content!r} complete={self.complete}>"
