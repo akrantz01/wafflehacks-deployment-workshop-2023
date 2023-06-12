@@ -20,7 +20,7 @@ def list_todos():
     Get a list of all the todos
     """
     return [
-        dict(id=todo.id, content=todo.id, complete=todo.complete)
+        dict(id=todo.id, content=todo.content, complete=todo.complete)
         for todo in current_user.todos
     ]
 
