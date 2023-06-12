@@ -21,7 +21,7 @@ def list_todos():
     """
     return [
         dict(id=todo.id, content=todo.id, complete=todo.complete)
-        for todo in Todo.query.all()
+        for todo in current_user.todos
     ]
 
 
@@ -35,7 +35,7 @@ def create_todo():
     if content is None:
         abort(400)
 
-    todo = Todo(content=content)
+    todo = Todo(content=content, user=current_user)
     db.session.add(todo)
     db.session.commit()
 
@@ -50,6 +50,8 @@ def toggle_todo(id: int):
     :param id: the todo's ID
     """
     todo = db.get_or_404(Todo, id)
+    if todo.user != current_user:
+        abort(403)
 
     todo.complete = not todo.complete
     db.session.commit()
@@ -66,6 +68,9 @@ def delete_todo(id: int):
     """
     todo = db.session.get(Todo, id)
     if todo is not None:
+        if todo.user != current_user:
+            abort(403)
+
         db.session.delete(todo)
         db.session.commit()
 
