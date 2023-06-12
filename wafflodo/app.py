@@ -1,6 +1,9 @@
+import json
+
 from flask import Flask, abort, request
 from flask_login import current_user, login_required, login_user, logout_user
 from passlib.hash import argon2
+from werkzeug.exceptions import HTTPException
 
 from .database import Todo, User, db, initialize_database
 from .login import initialize_login
@@ -135,3 +138,17 @@ def logout():
     """
     logout_user()
     return dict(success=True)
+
+
+@app.errorhandler(HTTPException)
+def error_handler(error: HTTPException):
+    response = error.get_response()
+    response.data = json.dumps(
+        {
+            "code": error.code,
+            "name": error.name,
+            "description": error.description,
+        }
+    )
+    response.content_type = "application/json"
+    return response
