@@ -1,9 +1,13 @@
 from flask import Flask, request, abort
+from flask_login import current_user, login_required, login_user, logout_user
+from passlib.hash import argon2
+from sqlalchemy import select
 
-from .database import initialize_database, db, Todo
+from .database import initialize_database, db, Todo, User
 from .login import initialize_login
 
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "some-secure-secret"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
 
 initialize_database(app)
@@ -63,3 +67,64 @@ def delete_todo(id: int):
         db.session.commit()
 
     return "", 204
+
+
+@app.post("/register")
+def register():
+    """
+    Register a new user
+    """
+    username = request.json.get("username")
+    password = request.json.get("password")
+    if username is None or password is None:
+        abort(400)
+
+    hashed = argon2.hash(password)
+
+    user = User(username=username, password=hashed)
+    db.session.add(user)
+    db.session.commit()
+
+    return dict(success=True)
+
+
+@app.post("/login")
+def login():
+    """
+    Start a new session
+    """
+    username = request.json.get("username")
+    password = request.json.get("password")
+    if username is None or password is None:
+        abort(400)
+
+    result = db.session.execute(select(User).where(User.username == username))
+    user = result.scalar_one_or_none()
+    if user is None:
+        abort(401)
+
+    if not argon2.verify(password, user.password):
+        abort(401)
+
+    login_user(user)
+
+    return dict(success=True)
+
+
+@app.get("/me")
+@login_required
+def me():
+    """
+    Get details about the current user
+    """
+    return dict(id=current_user.id, username=current_user.username)
+
+
+@app.get("/logout")
+@login_required
+def logout():
+    """
+    Logout the current user
+    """
+    logout_user()
+    return dict(success=True)

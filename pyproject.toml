@@ -12,6 +12,8 @@ flask-sqlalchemy = "^3.0.3"
 alembic = "^1.11.1"
 flask-cors = "^3.0.10"
 flask-login = "^0.6.2"
+passlib = "^1.7.4"
+argon2-cffi = "^21.3.0"
 
 
 [build-system]
