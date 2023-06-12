@@ -1,8 +1,8 @@
-from flask import Flask, request, abort
+from flask import Flask, abort, request
 from flask_login import current_user, login_required, login_user, logout_user
 from passlib.hash import argon2
 
-from .database import initialize_database, db, Todo, User
+from .database import Todo, User, db, initialize_database
 from .login import initialize_login
 
 app = Flask(__name__)

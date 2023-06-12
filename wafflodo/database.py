@@ -3,7 +3,7 @@ from typing import List
 from flask import Flask
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.orm import relationship, Mapped
+from sqlalchemy.orm import Mapped, relationship
 
 db = SQLAlchemy()
 

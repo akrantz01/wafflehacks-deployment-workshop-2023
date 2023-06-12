@@ -3,7 +3,7 @@ from typing import Optional
 from flask import Flask, abort
 from flask_login import LoginManager
 
-from .database import db, User
+from .database import User, db
 
 login_manager = LoginManager()
 
