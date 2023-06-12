@@ -1,7 +1,6 @@
 from flask import Flask, request, abort
 from flask_login import current_user, login_required, login_user, logout_user
 from passlib.hash import argon2
-from sqlalchemy import select
 
 from .database import initialize_database, db, Todo, User
 from .login import initialize_login
@@ -102,8 +101,7 @@ def login():
     if username is None or password is None:
         abort(400)
 
-    result = db.session.execute(select(User).where(User.username == username))
-    user = result.scalar_one_or_none()
+    user = User.query.where(User.username == username).first()
     if user is None:
         abort(401)
 
