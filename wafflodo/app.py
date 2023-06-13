@@ -18,9 +18,10 @@ app.config["CORS_ORIGINS"] = environ.get("CORS_ORIGINS", "*").split(",")
 app.config["CORS_SEND_WILDCARD"] = False
 app.config["CORS_SUPPORTS_CREDENTIALS"] = True
 app.config["SECRET_KEY"] = environ["SECRET_KEY"]
-app.config["SQLALCHEMY_DATABASE_URI"] = environ.get(
-    "DATABASE_URL",
-    "sqlite:///database.sqlite",
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    environ.get("DATABASE_URL", "sqlite:///database.sqlite")
+    .replace("postgres://", "postgresql+psycopg://", 1)
+    .replace("postgresql://", "postgresql+psycopg://", 1)
 )
 
 CORS(app)
