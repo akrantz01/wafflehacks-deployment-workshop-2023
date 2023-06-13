@@ -4,7 +4,8 @@ import useSWRMutation from 'swr/mutation';
 import { APIHook, APIMutationHook, FetcherArgs, fetcher } from './fetcher.ts';
 import { AuthenticationStatus, Error, User } from './types.ts';
 
-export const useCurrentUser: APIHook<User, void> = () => useSWR<User, Error>('current-user', () => fetcher('/me'));
+export const useCurrentUser: APIHook<User, void> = () =>
+  useSWR<User, Error>('current-user', () => fetcher('/me'), { shouldRetryOnError: false });
 
 export interface AuthArgs {
   username: string;
