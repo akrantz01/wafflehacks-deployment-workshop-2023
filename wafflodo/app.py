@@ -1,6 +1,7 @@
 import json
 
 from flask import Flask, abort, request
+from flask_cors import CORS
 from flask_login import current_user, login_required, login_user, logout_user
 from passlib.hash import argon2
 from werkzeug.exceptions import HTTPException
@@ -9,9 +10,12 @@ from .database import Todo, User, db, initialize_database
 from .login import initialize_login
 
 app = Flask(__name__)
+app.config["CORS_ORIGINS"] = "*"
+app.config["CORS_SEND_WILDCARD"] = False
 app.config["SECRET_KEY"] = "some-secure-secret"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
 
+CORS(app)
 initialize_database(app)
 initialize_login(app)
 
