@@ -6,6 +6,7 @@ from flask import Flask, abort, request
 from flask_cors import CORS
 from flask_login import current_user, login_required, login_user, logout_user
 from passlib.hash import argon2
+from sqlalchemy.exc import IntegrityError
 from werkzeug.exceptions import HTTPException
 
 from .database import Todo, User, db, initialize_database
@@ -105,9 +106,12 @@ def register():
 
     hashed = argon2.hash(password)
 
-    user = User(username=username, password=hashed)
-    db.session.add(user)
-    db.session.commit()
+    try:
+        user = User(username=username, password=hashed)
+        db.session.add(user)
+        db.session.commit()
+    except IntegrityError:
+        abort(400)
 
     return dict(success=True)
 
