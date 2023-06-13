@@ -18,11 +18,12 @@ After attending this workshop, you'll know how to:
 - setup cookie-based authentication
 - use structured logging to debug remotely deploy apps
 
-Prior to the workshop, you'll need to do the following:
+Prior to the workshop, you should do the following:
 - Register for accounts on [GitHub][], [Fly.io][], and [Vercel][]
   - Note: Fly.io may require a credit card to register, but you will not be charged as we will be staying within the free tier.
-- Download the [Fly CLI][]
-- Download the [Vercel CLI][]
+- Install [Fly CLI][]
+- Install [Vercel CLI][]
+- Install [Python Poetry][]
 
 
 [CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
@@ -32,3 +33,4 @@ Prior to the workshop, you'll need to do the following:
 [Vercel]: https://vercel.com/
 [Fly CLI]: https://fly.io/docs/hands-on/install-flyctl/
 [Vercel CLI]: https://vercel.com/docs/cli
+[Python Poetry]: https://python-poetry.org/docs/#installation
