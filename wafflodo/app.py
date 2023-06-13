@@ -113,6 +113,8 @@ def register():
     except IntegrityError:
         abort(400)
 
+    app.logger.info(f"new user registered: {user.username!r} (id={user.id})")
+
     return dict(success=True)
 
 
@@ -128,9 +130,11 @@ def login():
 
     user = User.query.where(User.username == username).first()
     if user is None:
+        app.logger.info(f"failed login attempt for {username!r}")
         abort(401)
 
     if not argon2.verify(password, user.password):
+        app.logger.info(f"failed login attempt for {username!r} (id={user.id})")
         abort(401)
 
     login_user(user)
