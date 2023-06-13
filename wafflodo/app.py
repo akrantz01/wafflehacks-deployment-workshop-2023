@@ -12,6 +12,7 @@ from .login import initialize_login
 app = Flask(__name__)
 app.config["CORS_ORIGINS"] = "*"
 app.config["CORS_SEND_WILDCARD"] = False
+app.config["CORS_SUPPORTS_CREDENTIALS"] = True
 app.config["SECRET_KEY"] = "some-secure-secret"
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
 
