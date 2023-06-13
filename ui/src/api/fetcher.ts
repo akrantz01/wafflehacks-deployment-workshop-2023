@@ -5,7 +5,7 @@ import { Error } from './types.ts';
 
 const SUCCESS_CODES: number[] = [200, 201, 204];
 
-const BASE_URL = 'http://127.0.0.1:5000';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export type APIHook<Data, Args> = (args: Args) => SWRResponse<Data, Error>;
 export type APIMutationHook<Data, Args, Body> = (args: Args) => SWRMutationResponse<Data, Error, Body>;
