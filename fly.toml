@@ -1,0 +1,26 @@
+# fly.toml app configuration file generated for wafflodo-demo on 2023-06-13T13:55:35-07:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = "wafflodo-demo"
+primary_region = "sea"
+
+[deploy]
+  release_command = "flask db upgrade"
+  strategy = "rolling"
+
+[env]
+  CORS_ORIGINS = "*"
+  FLASK_APP = "wafflodo"
+
+[http_service]
+  internal_port = 8000
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 250
+    soft_limit = 200
