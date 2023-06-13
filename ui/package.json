@@ -19,6 +19,7 @@
     "swr": "^2.1.5"
   },
   "devDependencies": {
+    "@types/node": "^18",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
