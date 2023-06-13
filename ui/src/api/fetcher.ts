@@ -14,6 +14,22 @@ export interface FetcherArgs<Arg> {
   arg: Arg;
 }
 
+export class FetchError implements Error {
+  readonly code: number;
+  readonly name: string;
+  readonly description: string;
+
+  public constructor(data: Error) {
+    this.code = data.code;
+    this.name = data.name;
+    this.description = data.description;
+  }
+
+  get isClient(): boolean {
+    return this.code >= 400 && this.code < 500;
+  }
+}
+
 export async function fetcher<Data, Body = never>(path: string, method?: string, body?: Body): Promise<Data> {
   const response = await fetch(BASE_URL + path, {
     method: method || 'GET',
@@ -23,5 +39,5 @@ export async function fetcher<Data, Body = never>(path: string, method?: string,
   const data = await response.json();
 
   if (SUCCESS_CODES.includes(response.status)) return data;
-  else throw data;
+  else throw new FetchError(data);
 }

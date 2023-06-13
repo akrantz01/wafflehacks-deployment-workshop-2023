@@ -1,7 +1,7 @@
 import { Button, FormControl, FormLabel, Input, VStack, useToast } from '@chakra-ui/react';
 import { FormEvent, ReactElement, useState } from 'react';
 
-import { AuthArgs, AuthenticationStatus } from '@/api';
+import { AuthArgs, AuthenticationStatus, FetchError } from '@/api';
 
 interface Toast {
   title: string;
@@ -41,11 +41,19 @@ const Form = ({ trigger, isLoading, success, error, submit, loadingText, onSucce
         status: 'info',
       });
     } catch (e) {
-      toast({
-        title: error.title,
-        description: error.description,
-        status: 'error',
-      });
+      if (e instanceof FetchError && e.isClient) {
+        toast({
+          title: error.title,
+          description: error.description,
+          status: 'error',
+        });
+      } else {
+        toast({
+          title: 'An unexpected error occurred',
+          description: 'We encountered an unexpected error while processing your request. Please try again later.',
+          status: 'error',
+        });
+      }
     }
   };
 
