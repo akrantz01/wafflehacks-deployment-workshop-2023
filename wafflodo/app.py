@@ -1,5 +1,7 @@
 import json
+from os import environ
 
+from dotenv import load_dotenv
 from flask import Flask, abort, request
 from flask_cors import CORS
 from flask_login import current_user, login_required, login_user, logout_user
@@ -9,12 +11,17 @@ from werkzeug.exceptions import HTTPException
 from .database import Todo, User, db, initialize_database
 from .login import initialize_login
 
+load_dotenv()
+
 app = Flask(__name__)
-app.config["CORS_ORIGINS"] = "*"
+app.config["CORS_ORIGINS"] = environ.get("CORS_ORIGINS", "*").split(",")
 app.config["CORS_SEND_WILDCARD"] = False
 app.config["CORS_SUPPORTS_CREDENTIALS"] = True
-app.config["SECRET_KEY"] = "some-secure-secret"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite"
+app.config["SECRET_KEY"] = environ["SECRET_KEY"]
+app.config["SQLALCHEMY_DATABASE_URI"] = environ.get(
+    "DATABASE_URL",
+    "sqlite:///database.sqlite",
+)
 
 CORS(app)
 initialize_database(app)
