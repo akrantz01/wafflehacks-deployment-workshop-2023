@@ -2,10 +2,12 @@ from typing import List
 
 from flask import Flask
 from flask_login import UserMixin
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import Mapped, relationship
 
 db = SQLAlchemy()
+migrate = Migrate()
 
 
 class User(db.Model, UserMixin):
@@ -41,6 +43,7 @@ def initialize_database(app: Flask):
     :param app: the Flask app
     """
     db.init_app(app)
+    migrate.init_app(app, db)
 
     with app.app_context():
         db.create_all()
