@@ -14,4 +14,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY migrations migrations
 COPY wafflodo wafflodo
 
-CMD ["gunicorn", "-w", "1", "-b", "[::]:8000", "wafflodo:app"]
+CMD ["gunicorn", "-w", "1", "-b", "[::]:8000", "--access-logfile", "-", "--error-logfile", "-", "wafflodo:app"]
