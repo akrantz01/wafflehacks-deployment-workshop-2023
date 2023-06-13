@@ -26,5 +26,5 @@ export const useRegisterMutation: APIMutationHook<AuthenticationStatus, void, Au
 
 export const useLogoutMutation: APIMutationHook<AuthenticationStatus, void, void> = () =>
   useSWRMutation<AuthenticationStatus, Error, Key, void>('current-user', () =>
-    fetcher<AuthenticationStatus>('/logout', 'DELETE'),
+    fetcher<AuthenticationStatus>('/logout'),
   );
