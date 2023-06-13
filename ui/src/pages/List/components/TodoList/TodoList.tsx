@@ -2,13 +2,14 @@ import { VStack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 
 import { useTodos } from '@/api';
+import Loading from '@/components/Loading.tsx';
 
 import Item from './components/Item.tsx';
 
 const TodoList = (): ReactElement => {
   const { data = [], isLoading } = useTodos();
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <Loading />;
 
   return (
     <VStack spacing={4}>
