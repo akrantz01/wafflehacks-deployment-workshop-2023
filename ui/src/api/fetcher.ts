@@ -35,6 +35,7 @@ export async function fetcher<Data, Body = never>(path: string, method?: string,
     method: method || 'GET',
     headers: body ? { 'Content-Type': 'application/json' } : {},
     body: body ? JSON.stringify(body) : undefined,
+    credentials: 'include',
   });
   const data = await response.json();
 
