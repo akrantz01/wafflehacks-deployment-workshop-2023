@@ -1,4 +1,4 @@
-# WaffleHacks 2023 Cloud Deployment Workshop
+# [WaffleHacks][] 2023 Cloud Deployment Workshop
 
 Have you ever gotten [CORS][] errors, cookie problems, or just ran into trouble
 making your incredible app publicly accessible? Worry no longer! We’ll teach
@@ -18,14 +18,26 @@ After attending this workshop, you'll know how to:
 - setup cookie-based authentication
 - use structured logging to debug remotely deploy apps
 
+## Before the workshop
+
+This workshop assumes you have some familiarity with Python, 
+JavaScript/TypeScript, and the command line. None of the language concepts will
+be explained since we lack the time to do so, and this workshop is focused
+on the time after the application is developed. We will only be making small 
+changes to the service to ensure it can be deployed.
+
+If you need help with writing your application, attend one of our other
+excellent workshops!
+
 Prior to the workshop, you should do the following:
 - Register for accounts on [GitHub][], [Fly.io][], and [Vercel][]
-  - Note: Fly.io may require a credit card to register, but you will not be charged as we will be staying within the free tier.
+  - Note: Fly.io may require a credit card to register, but you will not be 
+    charged as we will be staying within the free tier.
 - Install [Fly CLI][]
 - Install [Vercel CLI][]
 - Install [Python Poetry][]
 
-
+[WaffleHacks]: https://wafflehacks.org
 [CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [12 Factor App]: https://12factor.net/
 [GitHub]: https://github.com/
