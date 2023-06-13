@@ -7,13 +7,13 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+argon2-cffi = "^21.3.0"
 flask = "^2.3.2"
-flask-sqlalchemy = "^3.0.3"
-alembic = "^1.11.1"
 flask-cors = "^3.0.10"
 flask-login = "^0.6.2"
+flask-migrate = "^4.0.4"
+flask-sqlalchemy = "^3.0.3"
 passlib = "^1.7.4"
-argon2-cffi = "^21.3.0"
 
 
 [tool.poetry.group.dev.dependencies]
