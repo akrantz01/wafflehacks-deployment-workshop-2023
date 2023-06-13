@@ -1,18 +1,31 @@
-import { Box, Button, Flex, FormControl, FormLabel, Input, VStack } from '@chakra-ui/react';
+import { Box, Button, Flex, FormControl, FormLabel, Input, VStack, useToast } from '@chakra-ui/react';
 import { FormEvent, ReactElement, useState } from 'react';
 
 import { useLoginMutation } from '@/api';
 
 const Login = (): ReactElement => {
   const { isMutating, trigger } = useLoginMutation();
+  const toast = useToast();
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const onSubmit = async (event: FormEvent) => {
     event.preventDefault();
-    await trigger({ username, password });
-    // TODO: report error
+    try {
+      await trigger({ username, password });
+      toast({
+        title: 'Successfully logged in',
+        description: "You're now logged in! Time to get to work.",
+        status: 'info',
+      });
+    } catch (e) {
+      toast({
+        title: 'Invalid username or password',
+        description: 'Please check your username and password are correct.',
+        status: 'error',
+      });
+    }
   };
 
   return (

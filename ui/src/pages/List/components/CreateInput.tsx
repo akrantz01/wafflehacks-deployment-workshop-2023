@@ -1,5 +1,5 @@
 import { PlusSquareIcon } from '@chakra-ui/icons';
-import { Button, Flex, Input } from '@chakra-ui/react';
+import { Button, Flex, Input, useToast } from '@chakra-ui/react';
 import { ReactElement, useState } from 'react';
 
 import { useCreateTodoMutation } from '@/api';
@@ -8,10 +8,16 @@ const CreateInput = (): ReactElement => {
   const [content, setContent] = useState('');
 
   const { trigger, isMutating } = useCreateTodoMutation();
+  const toast = useToast();
 
   const onSubmit = async () => {
     await trigger({ content });
     setContent('');
+    toast({
+      title: 'New todo added',
+      description: "We've created that todo for you. Better get to work!",
+      status: 'success',
+    });
   };
 
   return (
