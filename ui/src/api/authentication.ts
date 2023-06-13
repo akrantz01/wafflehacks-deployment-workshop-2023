@@ -6,7 +6,7 @@ import { AuthenticationStatus, Error, User } from './types.ts';
 
 export const useCurrentUser: APIHook<User, void> = () => useSWR<User, Error>('current-user', () => fetcher('/me'));
 
-interface AuthArgs {
+export interface AuthArgs {
   username: string;
   password: string;
 }
