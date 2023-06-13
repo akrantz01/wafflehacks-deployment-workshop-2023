@@ -35,7 +35,7 @@ def create_todo():
     Create a new todo
     """
     content = request.json.get("content")
-    if content is None:
+    if content is None or len(content) == 0:
         abort(400)
 
     todo = Todo(content=content, user=current_user)
@@ -87,7 +87,7 @@ def register():
     """
     username = request.json.get("username")
     password = request.json.get("password")
-    if username is None or password is None:
+    if username is None or len(username) == 0 or password is None or len(password) == 0:
         abort(400)
 
     hashed = argon2.hash(password)
