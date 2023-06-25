@@ -37,6 +37,19 @@ Prior to the workshop, you should do the following:
 - Install [Vercel CLI][]
 - Install [Python Poetry][]
 
+## After the workshop
+
+All the stages of the code can be found in the following branches:
+
+- [starter](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/main)
+- [cors](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/1-cors) ([view changes](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/compare/main...1-cors))
+- [cookies](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/2-cookies) ([view changes](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/compare/1-cors...2-cookies))
+- [config](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/3-config) ([view changes](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/compare/2-cookies...3-config))
+- [migrations](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/4-migrations) ([view changes](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/compare/3-config...4-migrations))
+- [containers](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/5-container) ([view changes](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/compare/4-migrations...5-container))
+- [deployment](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/6-deploy) ([view changes](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/compare/5-container...6-deploy))
+- [logging](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/tree/7-logging) ([view changes](https://github.com/akrantz01/wafflehacks-deployment-workshop-2023/compare/6-deploy...7-logging))
+
 [WaffleHacks]: https://wafflehacks.org
 [CORS]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 [12 Factor App]: https://12factor.net/
